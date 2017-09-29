@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{3D9A9A25-372B-4ABE-8A67-C3BE3F749A24}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SFCaseSrvr\SFCaseSrvr.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SFCaseMgmt\SFCaseMgmt.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SFCaseSrvr">
+        <MSBuild Projects="SFCaseSrvr\SFCaseSrvr.dproj"/>
+    </Target>
+    <Target Name="SFCaseSrvr:Clean">
+        <MSBuild Projects="SFCaseSrvr\SFCaseSrvr.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SFCaseSrvr:Make">
+        <MSBuild Projects="SFCaseSrvr\SFCaseSrvr.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SFCaseMgmt">
+        <MSBuild Projects="SFCaseMgmt\SFCaseMgmt.dproj"/>
+    </Target>
+    <Target Name="SFCaseMgmt:Clean">
+        <MSBuild Projects="SFCaseMgmt\SFCaseMgmt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SFCaseMgmt:Make">
+        <MSBuild Projects="SFCaseMgmt\SFCaseMgmt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SFCaseSrvr;SFCaseMgmt"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SFCaseSrvr:Clean;SFCaseMgmt:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SFCaseSrvr:Make;SFCaseMgmt:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
